@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Buddy - Track Your Fitness</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💪Gym Buddy</h1>
+            <p class="subtitle">Track your workouts, build consistency</p>
+        </header>
+
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-label">Total Workouts</div>
+                <div class="stat-value" id="totalWorkouts">0</div>
+            </div>
+            <div class="stat-card strength">
+                <div class="stat-label">Strength Sessions</div>
+                <div class="stat-value" id="strengthCount">0</div>
+            </div>
+            <div class="stat-card cardio">
+                <div class="stat-label">Cardio Sessions</div>
+                <div class="stat-value" id="cardioCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Sets</div>
+                <div class="stat-value" id="totalSets">0</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn-strength" onclick="openWorkoutModal('strength')">+ Add Strength Workout</button>
+            <button class="btn-cardio" onclick="openWorkoutModal('cardio')">+ Add Cardio Workout</button>
+            <button class="btn-clear" onclick="clearAllData()">Clear All Data</button>
+        </div>
+
+        <div class="workouts-container" id="workoutsContainer">
+            <div class="empty-state">
+                <h3>No workouts yet!</h3>
+                <p>Start tracking your fitness journey by adding a workout above.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="workoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeWorkoutModal()">×</button>
+                <h2 id="modalTitle">Add Workout</h2>
+                <p class="subtitle">Define your exercise and target sets</p>
+            </div>
+            <div class="modal-body">
+                <form id="workoutForm">
+                    <div class="form-group">
+                        <label for="exerciseName">Exercise Name</label>
+                        <input type="text" id="exerciseName" placeholder="e.g., Bench Press, Running" required>
+                        <div class="error" id="nameError">Please enter an exercise name</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="strength">Strength</option>
+                            <option value="cardio">Cardio</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numSets">Number of Sets</label>
+                        <input type="number" id="numSets" placeholder="e.g., 3" min="1" max="10" value="3" required>
+                        <div class="error" id="setsError">Please enter number of sets (1-10)</div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit">Add Workout</button>
+                        <button type="button" onclick="closeWorkoutModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="setModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeSetModal()">×</button>
+                <h2 id="setModalTitle">Add Set</h2>
+                <p class="subtitle">Record your performance</p>
+            </div>
+            <div class="modal-body">
+                <form id="setForm">
+                    <div class="form-group" id="repsGroup">
+                        <label for="reps">Reps</label>
+                        <input type="number" id="reps" placeholder="e.g., 10" min="1">
+                        <div class="error" id="repsError">Please enter number of reps</div>
+                    </div>
+
+                    <div class="form-group" id="weightGroup">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" placeholder="e.g., 50" min="0" step="0.5">
+                        <div class="error" id="weightError">Please enter weight</div>
+                    </div>
+
+                    <div class="form-group" id="durationGroup" style="display: none;">
+                        <label for="duration">Duration (minutes)</label>
+                        <input type="number" id="duration" placeholder="e.g., 30" min="1">
+                        <div class="error" id="durationError">Please enter duration</div>
+                    </div>
+
+                    <div class="form-group" id="distanceGroup" style="display: none;">
+                        <label for="distance">Distance (km)</label>
+                        <input type="number" id="distance" placeholder="e.g., 5" min="0" step="0.1">
+                        <div class="error" id="distanceError">Please enter distance</div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit">Add Set</button>
+                        <button type="button" onclick="closeSetModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
